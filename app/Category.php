@@ -12,6 +12,6 @@ class Category extends Model
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
   
     public function products(){
-      $this->hasMany('Product');
+      return $this->hasMany('App\Product');
     }
 }

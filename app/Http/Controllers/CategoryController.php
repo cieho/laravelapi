@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Category;
@@ -25,23 +24,29 @@ class CategoryController extends Controller
       return response()->json(['datos' => $category], 200);
     }
   
-    public function create()
+    public function store(Request $request)
     {
-      return 'showing create category form';
-    }
-  
-    public function store()
-    {
-      return 'storing category data';
-    }
-  
-    public function edit($id)
-    {
-      return 'editing category id:'.$id;
+      if(!$request->input('name'))
+      {
+        return response()->json(['message' => "Category not stored", "code" => 422], 422);
+      }
+      //Category::create($request->all());
+      Category::create([
+          'name' => $request->input('name'),
+          'bstatus' => 1
+        ]);     
+      
+      return response()->json(['message' => 'Category stored correctly'], 201);
+      
     }
   
     public function update($id)
     {
       return 'updating category id:'.$id;
+    }
+  
+    public function destroy($id)
+    {
+      return 'delting category id:'.$id;
     }
 }

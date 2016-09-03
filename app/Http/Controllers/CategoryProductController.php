@@ -6,17 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Product;
 
 class CategoryProductController extends Controller
 {
-    public function showAll()
+    /*public function showAll()
     {
       return 'showing all products';
-    }
+      
+    }*/
   
     public function index($id)
     {
-      return 'showing all products from category_id:'.$id;
+      $category = Category::find($id);
+      if(!$category){
+        return response()->json(['message' => "Category not found", "code" => 404], 404);
+      }
+      return response()->json(['data' => $category->products()->get()],200);
     }
   
     public function show($categoryid,$productid)

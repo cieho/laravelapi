@@ -12,6 +12,6 @@ class Product extends Model
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     
     public function category(){
-      $this->belongsTo('Category');
+      return $this->belongsTo('App\Category');
     }
 }
