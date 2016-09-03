@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::resource('products','ProductController', ['only'=>['index','show']]);
+Route::resource('categories','CategoryController');
+Route::resource('categories.products','CategoryProductController', ['except' => ['show']]);
+
 
 /*
 |--------------------------------------------------------------------------
